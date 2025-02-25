@@ -98,12 +98,12 @@ fun main() {
     check(sam.angerLevel == 1)
     check(sam.anger() == "calm")
 
-    amy.pat(10)                     // Too many pats!
+    amy.pat(11)                     // Too many pats!
     println(amy.info())
     check(amy.angerLevel == 10)
     check(amy.anger() == "apoplectic")
 
-    amy.pat(9)                      // And calm again
+    amy.pat(10)                     // And calm again
     println(amy.info())
     check(amy.angerLevel == 1)
     check(amy.anger() == "calm")
@@ -130,7 +130,7 @@ class Gnome(val name: String, var activity: String) {
      *  NAME is ACTIVITY and is ANGER WORD
      */
     fun info(): String {
-        return ""
+        return "$name is $activity and is ${anger()}"
     }
 
     /**
@@ -142,7 +142,14 @@ class Gnome(val name: String, var activity: String) {
      * - 9-10 -> apoplectic
      */
     fun anger(): String {
-        return ""
+        return when (angerLevel) {
+            in 1..2 -> "calm"
+            in 3..4 -> "annoyed"
+            in 5..6 -> "angry"
+            in 7..8 -> "furious"
+            in 9..10 -> "apoplectic"
+            else -> "ERROR"
+        }
     }
 
     /**
@@ -153,7 +160,8 @@ class Gnome(val name: String, var activity: String) {
     fun poke(numPokes: Int) {
         println("$name gets poked $numPokes times...")
 
-
+        angerLevel += numPokes
+        if (angerLevel > 10) angerLevel = 10
     }
 
     /**
@@ -167,7 +175,13 @@ class Gnome(val name: String, var activity: String) {
     fun pat(numPats: Int) {
         println("$name gets patted $numPats times...")
 
-
+        if (numPats > 10) {
+            angerLevel = 10
+        }
+        else {
+            angerLevel -= numPats
+            if (angerLevel < 1) angerLevel = 1
+        }
     }
 }
 
