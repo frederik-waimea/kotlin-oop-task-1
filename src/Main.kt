@@ -1,30 +1,9 @@
-/**
- * ================================================
- * Garden Gnomes
- *
- * A bunch of gnomes have appeared in your garden!
- *
- *    /\      /\      /\
- *   ('')    (oo)    (xx)
- * __{__}____{__}____{__}__
- *
- * Each gnome has a particular activity that it
- * specialises in: fishing, digging, smoking a
- * pipe, etc.
- *
- * Gnomes are generally friendly little things, but
- * they do have a bad temper when provoked. If you
- * poke them, they will get cross. Often a pat on
- * head can help calm them down
- * ================================================
- */
-
-
 fun main() {
+    println("Hello World!")
     println("Gnomes")
     println("------------------------")
 
-    // Creating gnomes
+// Creating gnomes
 
     val jim = Gnome("Jim", "fishing")
     val sam = Gnome("Sam", "digging")
@@ -32,7 +11,7 @@ fun main() {
 
     println("------------------------")
 
-    // Checking gnome anger
+// Checking gnome anger
 
     check(jim.angerLevel == 1)
     check(sam.angerLevel == 1)
@@ -44,7 +23,7 @@ fun main() {
 
     println("------------------------")
 
-    // Showing gnome info
+// Showing gnome info
 
     println(jim.info())
     println(sam.info())
@@ -56,7 +35,7 @@ fun main() {
 
     println("------------------------")
 
-    // Poking some gnomes
+// Poking some gnomes
 
     jim.poke(1)                     // Should still be calm
     println(jim.info())
@@ -86,7 +65,7 @@ fun main() {
 
     println("------------------------")
 
-    // Patting the gnomes to calm them
+// Patting the gnomes to calm them
 
     jim.pat(9)                      // Should now be calm
     println(jim.info())
@@ -107,8 +86,10 @@ fun main() {
     println(amy.info())
     check(amy.angerLevel == 1)
     check(amy.anger() == "calm")
-
 }
+
+
+
 
 
 /**
@@ -119,7 +100,7 @@ fun main() {
  * anger level initially set to 1 (calm)
  */
 class Gnome(val name: String, var activity: String) {
-    var angerLevel = 1
+    var angerLevel: Int = 1
 
     init {
         println("Creating a gnome... $name")
@@ -130,7 +111,7 @@ class Gnome(val name: String, var activity: String) {
      *  NAME is ACTIVITY and is ANGER WORD
      */
     fun info(): String {
-        return ""
+        return "$name is $activity and is"
     }
 
     /**
@@ -142,6 +123,22 @@ class Gnome(val name: String, var activity: String) {
      * - 9-10 -> apoplectic
      */
     fun anger(): String {
+        return when {
+            angerLevel in 1..2 -> "calm"
+            angerLevel in 3..4 -> "annoyed"
+            angerLevel in 5..6 -> "angry"
+            angerLevel in 7..8 -> "furious"
+            angerLevel in 9..10 -> "apoplectic"
+
+
+            if(angerLevel < 1 ||  angerLevel < 10)
+
+
+
+
+
+
+        }
         return ""
     }
 
@@ -170,4 +167,5 @@ class Gnome(val name: String, var activity: String) {
 
     }
 }
+
 
