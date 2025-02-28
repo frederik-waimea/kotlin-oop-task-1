@@ -111,7 +111,7 @@ class Gnome(val name: String, var activity: String) {
      *  NAME is ACTIVITY and is ANGER WORD
      */
     fun info(): String {
-        return "$name is $activity and is"
+        return "$name is $activity and is ${anger()}"
     }
 
     /**
@@ -123,24 +123,20 @@ class Gnome(val name: String, var activity: String) {
      * - 9-10 -> apoplectic
      */
     fun anger(): String {
-        return when {
-            angerLevel in 1..2 -> "calm"
-            angerLevel in 3..4 -> "annoyed"
-            angerLevel in 5..6 -> "angry"
-            angerLevel in 7..8 -> "furious"
-            angerLevel in 9..10 -> "apoplectic"
+       return when(angerLevel) {
+            1,2 -> "calm"
+            3,4 -> "annoyed"
+            5,6 -> "angry"
+            7,8 -> "furious"
+            9,10 -> "apoplectic"
 
-
-            if(angerLevel < 1 ||  angerLevel < 10)
-
-
-
-
-
-
+            else -> ""
         }
+
+
         return ""
-    }
+}
+
 
     /**
      * Poking a gnome makes it angrier
@@ -149,10 +145,8 @@ class Gnome(val name: String, var activity: String) {
      */
     fun poke(numPokes: Int) {
         println("$name gets poked $numPokes times...")
-
-
+        angerLevel = (angerLevel + numPokes).coerceIn(1, 10)
     }
-
     /**
      * Patting a gnome makes it calmer
      * The anger level goes down 1 for
@@ -163,7 +157,12 @@ class Gnome(val name: String, var activity: String) {
      */
     fun pat(numPats: Int) {
         println("$name gets patted $numPats times...")
-
+        if (numPats >= 10) {
+            angerLevel = 10
+        }
+        else {
+            angerLevel = (angerLevel - numPats).coerceIn(1, 10)
+        }
 
     }
 }
